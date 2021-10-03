@@ -1,0 +1,11 @@
+# 七牛云相关
+qiniu:
+  access_key: ""
+  secret_key: ""
+  bucket_name: "python_wx_pic"
+  domain: "http://qiniuimg.beangogo.cn"  # 文件默认域名  例如：http://qiniuimg.beangogo.cn
+  exist_day: 1  # 文件的生存周期，单位(天)，若为负值则永久保存
+
+outdir: /Users/tao/Desktop
+
+

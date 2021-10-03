@@ -3,6 +3,7 @@ package qiniu
 import (
 	"context"
 	"fmt"
+
 	"github.com/qiniu/go-sdk/v7/auth/qbox"
 	"github.com/qiniu/go-sdk/v7/storage"
 )
@@ -13,6 +14,11 @@ type Qiniu struct {
 	AccessKey  string
 	SecretKey  string
 	BucketName string
+	Day        int
+}
+
+func NewQiniuClient(AccessKey, SecretKey, BucketName string) *Qiniu {
+	return &Qiniu{AccessKey, SecretKey, BucketName, 1}
 }
 
 // 上传文件
@@ -55,12 +61,12 @@ func (q Qiniu) DeleteAferDay(key string, day int) error {
 }
 
 // 上传文件并设置生命周期
-func (q Qiniu) UploadAndDeleteAfter(filename, filepath string, day int) error {
+func (q Qiniu) UploadAndDeleteAfter(filename, filepath string) error {
 	err := q.Upload(filename, filepath)
 	if err != nil {
 		return err
 	}
-	err = q.DeleteAferDay(filename, day)
+	err = q.DeleteAferDay(filename, q.Day)
 	if err != nil {
 		return err
 	}
